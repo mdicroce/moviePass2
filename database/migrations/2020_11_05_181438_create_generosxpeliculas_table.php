@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class RoomXFuncion extends Migration
+class CreateGenerosxpeliculasTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,7 +13,10 @@ class RoomXFuncion extends Migration
      */
     public function up()
     {
-        //
+        Schema::create('generosxpeliculas', function (Blueprint $table) {
+            $table->id();
+            $table->timestamps();
+        });
     }
 
     /**
@@ -23,6 +26,6 @@ class RoomXFuncion extends Migration
      */
     public function down()
     {
-        //
+        Schema::dropIfExists('generosxpeliculas');
     }
 }

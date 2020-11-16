@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CuentaCredito extends Migration
+class CreateRoomsxcinesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,7 +13,10 @@ class CuentaCredito extends Migration
      */
     public function up()
     {
-        //
+        Schema::create('roomsxcines', function (Blueprint $table) {
+            $table->id();
+            $table->timestamps();
+        });
     }
 
     /**
@@ -23,6 +26,6 @@ class CuentaCredito extends Migration
      */
     public function down()
     {
-        //
+        Schema::dropIfExists('roomsxcines');
     }
 }

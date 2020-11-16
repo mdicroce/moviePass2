@@ -1,23 +1,4 @@
-@extends('layouts.app')
-
-@section('content')
-<div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-8">
-            <div class="card">
-                <div class="card-header">{{ __('Dashboard') }}</div>
-
-                <div class="card-body">
-                    @if (session('status'))
-                        <div class="alert alert-success" role="alert">
-                            {{ session('status') }}
-                        </div>
-                    @endif
-
-                    {{ __('You are logged in!') }}
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-@endsection
+GET /title/get-videos?tconst=tt0944947&limit=25&region=US HTTP/1.1
+X-Rapidapi-Key: b3a0fd95fdmsh9054c94d14ccc7cp16d43ajsndb9a6d7a7c2a
+X-Rapidapi-Host: imdb8.p.rapidapi.com
+Host: imdb8.p.rapidapi.com

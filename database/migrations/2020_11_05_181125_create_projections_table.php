@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class UserRol extends Migration
+class CreateProjectionsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,7 +13,10 @@ class UserRol extends Migration
      */
     public function up()
     {
-        //
+        Schema::create('projections', function (Blueprint $table) {
+            $table->id();
+            $table->timestamps();
+        });
     }
 
     /**
@@ -23,6 +26,6 @@ class UserRol extends Migration
      */
     public function down()
     {
-        //
+        Schema::dropIfExists('projections');
     }
 }

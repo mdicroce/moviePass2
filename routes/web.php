@@ -22,4 +22,4 @@ Auth::routes();
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 
-Route::get('/', [App\Http\Controllers\ApiController::class, 'index'])->name('index');
+Route::get('/', [App\Http\Controllers\MovieController::class, 'create'])->name('index');

@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateProjectionsTable extends Migration
+class CreateEntradasTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,8 +13,10 @@ class CreateProjectionsTable extends Migration
      */
     public function up()
     {
-        Schema::create('projections', function (Blueprint $table) {
-            $table->id();
+        Schema::create('entradas', function (Blueprint $table) {
+            $table->id()->unsigned();
+            $table->integer('sit_number');
+            $table->string('qr');
             $table->timestamps();
         });
     }
@@ -26,6 +28,6 @@ class CreateProjectionsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('projections');
+        Schema::dropIfExists('entradas');
     }
 }

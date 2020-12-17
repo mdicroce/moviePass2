@@ -18,9 +18,15 @@ class ApiController extends Controller
                 'timeout'  => 2.0,
             ]);
         }
-        public function nose()
+        public function index(/* $movieRequest */)
         {
-            
-            return $request = $client->request('GET','550?api_key=6f942a480ac7cb21ac1fdf860420ecd2');
+            $movieRequest = "now_playing";
+            $movieArray = array();
+            for($i = 1 ; $i<6 ; $i++)
+            {
+                return $request = $this->client->request('GET',"$movieRequest?api_key=6f942a480ac7cb21ac1fdf860420ecd2&language=en-US&page=$i")/* ->getBody() */;
+                array_push($movieArray,$request);
+            }
+            return $movieArray;
         }
 }

@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateGenerosxpeliculasTable extends Migration
+class CreateProvincesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,8 +13,9 @@ class CreateGenerosxpeliculasTable extends Migration
      */
     public function up()
     {
-        Schema::create('generosxpeliculas', function (Blueprint $table) {
-            $table->id();
+        Schema::create('provinces', function (Blueprint $table) {
+            $table->id()->unsigned();
+            $table->string('name');
             $table->timestamps();
         });
     }
@@ -26,6 +27,6 @@ class CreateGenerosxpeliculasTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('generosxpeliculas');
+        Schema::dropIfExists('provinces');
     }
 }

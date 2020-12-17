@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateMoviesxfuncionsTable extends Migration
+class CreateCreditcountsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,8 +13,9 @@ class CreateMoviesxfuncionsTable extends Migration
      */
     public function up()
     {
-        Schema::create('moviesxfuncions', function (Blueprint $table) {
-            $table->id();
+        Schema::create('creditcounts', function (Blueprint $table) {
+            $table->id()->unsigned();
+            $table->string('name');
             $table->timestamps();
         });
     }
@@ -26,6 +27,6 @@ class CreateMoviesxfuncionsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('moviesxfuncions');
+        Schema::dropIfExists('creditcounts');
     }
 }

@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreatePagosTable extends Migration
+class CreateTicketsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,8 +13,11 @@ class CreatePagosTable extends Migration
      */
     public function up()
     {
-        Schema::create('pagos', function (Blueprint $table) {
-            $table->id();
+        Schema::create('tickets', function (Blueprint $table) {
+            $table->id()->unsigned();
+            $table->foreignId('id_projection')->references('id')->on('projections')->onDelete('cascade')->onUpdate('cascade');
+            $table->integer('sit_number');
+            $table->string('qr');
             $table->timestamps();
         });
     }
@@ -26,6 +29,6 @@ class CreatePagosTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('pagos');
+        Schema::dropIfExists('tickets');
     }
 }

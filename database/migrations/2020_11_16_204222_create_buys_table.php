@@ -14,7 +14,11 @@ class CreateBuysTable extends Migration
     public function up()
     {
         Schema::create('buys', function (Blueprint $table) {
-            $table->id();
+            $table->id()->unsigned();
+            /* $table->foreignId('id_user')->references('id')->on('users')->onDelete('cascade')->onUpdate('cascade');
+            $table->foreignId('id_credit_card')->references('id')->on('creditcards')->onDelete('cascade')->onUpdate('cascade'); */
+            $table->integer('cuantity');
+            $table->float('total');
             $table->timestamps();
         });
     }

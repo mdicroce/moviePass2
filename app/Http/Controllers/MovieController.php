@@ -2,11 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Genre;
 use App\Models\Movie;
+use App\Models\genre_movie;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\ApiController;
-use App\Models\genre_movie;
 
 class MovieController extends Controller
 {
@@ -34,29 +35,54 @@ class MovieController extends Controller
      */
     public function create()
     {
-        return $jsonResults = $this->apiController->index()->getBody()->getContents();
-        $array = ($jsonResults) ? json_decode($jsonResults, true) : array();
-        
-        foreach ($array["results"] as $movie) {
-            $newMovie = new Movie();
-            $newMovie->id = $movie["id"];
-            $newMovie->title = $movie["title"];
-            $newMovie->original_title = $movie["original_title"];
-/*                 $newMovie->runtime = $movie["runtime"]; */
-            $newMovie->release_date = $movie["release_date"];
-            $newMovie->poster_path = $movie["poster_path"];
-            $newMovie->overview = $movie["overview"];
-            $newMovie->original_language = $movie["original_language"];
-            $newMovie->save();
-            foreach ($array["results"]["genre_ids"] as $genres)
-            {
-                $genresXmovie = new genre_movie();
-                $genresXmovie->id_movie = $movie["id"];
-                $genresXmovie->id_genre = $genres;
-            }
-        }
-        
+        $this->genreCreate();
+        $jsonResults = $this->apiController->index();
+        foreach($jsonResults as $key => $actualRequest)
+        {
+            $actualRequestJson = $actualRequest->getBody()->getContents();
+            $array = ($actualRequestJson) ? json_decode($actualRequestJson, true) : array();
+            foreach ($array["results"] as $movie) {
+                $newMovie = new Movie();
+                $newMovie->id = $movie["id"];
+                $newMovie->title = $movie["title"];
+                $newMovie->original_title = $movie["original_title"];
+    /*                 $newMovie->runtime = $movie["runtime"]; */
+                $newMovie->release_date = $movie["release_date"];
+                $newMovie->poster_path = $movie["poster_path"];
+                $newMovie->overview = $movie["overview"];
+                $newMovie->original_language = $movie["original_language"];
 
+                try {
+                    $newMovie->save();
+                    foreach ($movie["genre_ids"] as $genres) {
+                        $genresXmovie = new genre_movie();
+                        $genresXmovie->id_movie = $movie["id"];
+                        $genresXmovie->id_genre = $genres;
+                        $genresXmovie->save();
+                    }
+                } catch (\Throwable $th) {
+                }
+                
+            }
+
+        }
+    }
+    public function genreCreate()
+    {
+        $jsonResults = $this->apiController->genreIndex()->getBody()->getContents();
+        $array = ($jsonResults) ? json_decode($jsonResults, true) : array();
+        foreach($array["genres"] as $value)
+        {
+            $newGenre = new Genre();
+            $newGenre->id = $value["id"];
+            $newGenre->name = $value["name"];
+            try {
+                $newGenre->save();
+            } catch (\Throwable $th) {
+                //throw $th;
+            }
+            
+        }
     }
     /**
      * Store a newly created resource in storage.

@@ -25,7 +25,7 @@ class MovieController extends Controller
     {
         $movies = DB::table('movies')->get();
 
-        return view('movie.index',['movies' => $movies]);
+        return view('showmovies',['movies' => $movies]);
     }
 
     /**
@@ -35,6 +35,7 @@ class MovieController extends Controller
      */
     public function create()
     {
+        
         $this->genreCreate();
         $jsonResults = $this->apiController->index();
         foreach($jsonResults as $key => $actualRequest)

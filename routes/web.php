@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\MovieController;
+use Facade\FlareClient\View;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -13,13 +15,10 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    /* return env('API_KEY',"ho"); */
-    return view("home");
-});
+
 
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
-
-Route::get('/', [App\Http\Controllers\MovieController::class, 'create'])->name('index');
+Route::get('/aux', [MovieController::class, "create"])->name('createMovies');
+Route::get('/', [MovieController::class, "index"])->name('index');

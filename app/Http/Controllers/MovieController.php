@@ -23,11 +23,6 @@ class MovieController extends Controller
     }
     public function index()
     {
-        $movies = DB::table('movies')
-                ->join('genre_movie', 'movies.id', '=' , 'genre_movie.movie_id')
-                ->join('genres','genre_movie.genre_id','=', 'genres.id')
-                ->select('movies.*','genres.name')
-                ->get();
         $movies = Movie::all();
 
         return view('showmovies',['movies' => $movies]);
@@ -41,7 +36,7 @@ class MovieController extends Controller
     public function create()
     {
         
-        $this->genreCreate();
+       /*  $this->genreCreate(); */
         $jsonResults = $this->apiController->index();
         foreach($jsonResults as $key => $actualRequest)
         {
@@ -52,7 +47,6 @@ class MovieController extends Controller
                 $newMovie->id = $movie["id"];
                 $newMovie->title = $movie["title"];
                 $newMovie->original_title = $movie["original_title"];
-    /*                 $newMovie->runtime = $movie["runtime"]; */
                 $newMovie->release_date = $movie["release_date"];
                 $newMovie->poster_path = $movie["poster_path"];
                 $newMovie->overview = $movie["overview"];

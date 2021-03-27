@@ -20,13 +20,13 @@ use Illuminate\Support\Facades\Auth;
 
 
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+/* Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home'); */
 
 Route::get('/aux', [MovieController::class, "create"])->name('createMovies');
-Route::get('/', [MovieController::class, "index"])->name('index');
+Route::get('/home', [MovieController::class, "index"])->name('index');
 
 Auth::routes();
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
 
 

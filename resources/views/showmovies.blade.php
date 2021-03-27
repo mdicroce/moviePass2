@@ -1,6 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
+
 <section class="container-fluid bg-dark">
     @isset($movies)
     <article class="d-flex justify-content-center flex-wrap p-3">

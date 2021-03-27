@@ -24,7 +24,7 @@ class MovieController extends Controller
     public function index()
     {
         $movies = Movie::all();
-
+        
         return view('showmovies',['movies' => $movies]);
     }
 
@@ -36,7 +36,7 @@ class MovieController extends Controller
     public function create()
     {
         
-       /*  $this->genreCreate(); */
+        $this->genreCreate();
         $jsonResults = $this->apiController->index();
         foreach($jsonResults as $key => $actualRequest)
         {
@@ -61,11 +61,13 @@ class MovieController extends Controller
                         $genresXmovie->save();
                     }
                 } catch (\Throwable $th) {
+
                 }
                 
             }
 
         }
+        
     }
     public function genreCreate()
     {
@@ -79,7 +81,7 @@ class MovieController extends Controller
             try {
                 $newGenre->save();
             } catch (\Throwable $th) {
-                //throw $th;
+                
             }
             
         }
